@@ -1,0 +1,8 @@
+# ignore all folders outside of Assets
+
+Library/
+Logs/
+Packages/
+ProjectSettings/
+Temp/
+UserSettings/
