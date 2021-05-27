@@ -7,10 +7,17 @@ public class Move : MonoBehaviour
 
     private CharacterController controller;
     
+    Vector3 faccingLeft = new Vector3(-0.3f, 0.3f, 0.3f);
+    Vector3 faccingRight = new Vector3(0.3f, 0.3f, 0.3f);
+
     private float maxSpeed = 0.3f;
     private float playerAcceleration = 0.05f;
     private float playerDeceleration = 0.2f;
     private Vector3 playerSpeed = new Vector3(0, 0, 0);
+    private bool facingRight = true;
+
+    public Animator animator;
+    public GameObject sprite;
 
     // Start is called before the first frame update
     void Start()
@@ -31,10 +38,19 @@ public class Move : MonoBehaviour
             playerSpeed.x = max(-playerDeceleration * Time.deltaTime + playerSpeed.x, 0);
         }
 
+        animator.SetFloat("playerSpeed", Mathf.Abs(playerSpeed.x));
+
         controller.Move(playerSpeed);
+
+        if (xInput > 0 && !facingRight) {
+            sprite.transform.localScale = faccingRight;
+            facingRight = true;
+        } else if (xInput < 0 && facingRight) {
+            sprite.transform.localScale = faccingLeft;
+            facingRight = false;
+        }
     }
 
-    // whyyyyyyyyyy
     float min(float a, float b) {
         if (a < b) {
             return a;
