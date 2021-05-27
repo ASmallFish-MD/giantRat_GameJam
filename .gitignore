@@ -6,3 +6,9 @@ Packages/
 ProjectSettings/
 Temp/
 UserSettings/
+.vscode/
+obj/
+
+# project files
+/Assembly-CSharp.csproj
+/*.sln
