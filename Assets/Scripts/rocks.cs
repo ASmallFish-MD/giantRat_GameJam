@@ -1,6 +1,6 @@
 
 
-
+/*
 public float platformLeftEdge;
 public float platformRightEdge;
 
@@ -101,3 +101,4 @@ int GetRandomWeightedIndex(List<float> weights){
     // No other item was selected, so return very last index.
     return i;
 }
+*/
