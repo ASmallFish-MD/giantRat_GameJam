@@ -38,6 +38,30 @@ public class Move : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Pickup animation
+
+        if (Input.GetButtonDown("Use")){
+            PlayerAction.actionType actionTypeDone = this.GetComponent<PlayerAction>().performPlayerAction();
+            if(actionTypeDone == PlayerAction.actionType.PickingUp){
+                //PickingUp animation
+                animator.SetBool("usePressed", true);
+            }
+            else if(actionTypeDone == PlayerAction.actionType.Dropping){
+                //Dropping animation
+                animator.SetBool("usePressed", true);
+            }
+            else if(actionTypeDone == PlayerAction.actionType.UsePickaxe){
+                //Pickaxe animation
+                animator.SetBool("useIsPick", true);
+            }
+            else if(actionTypeDone == PlayerAction.actionType.Nothing){
+            }
+        } else {
+            //Reset animator
+            animator.SetBool("usePressed", false);
+            animator.SetBool("useIsPick", false);
+        }
+
         // input
         float xInput = Input.GetAxisRaw("Horizontal");
         bool valid = xInput != 0;
@@ -75,22 +99,6 @@ public class Move : MonoBehaviour
         }
 
         transform.Translate(playerSpeed);
-
-        if (Input.GetButtonDown("Use")){
-            PlayerAction.actionType actionTypeDone = this.GetComponent<PlayerAction>().performPlayerAction();
-            if(actionTypeDone == PlayerAction.actionType.PickingUp){
-                //PickingUp animation
-            }
-            else if(actionTypeDone == PlayerAction.actionType.Dropping){
-                //Dropping animation
-            }
-            else if(actionTypeDone == PlayerAction.actionType.UsePickaxe){
-                //UsePickaxe animation
-            }
-            else if(actionTypeDone == PlayerAction.actionType.Nothing){
-                //TODO: optionally play a 'cant pickup' sound
-            }
-        }
 
         if(transform.position.y < offScreenYPos){
             FindObjectOfType<GameController>().EndGame("You have fallen");

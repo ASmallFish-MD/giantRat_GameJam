@@ -1843,7 +1843,7 @@ Transform:
   m_GameObject: {fileID: 1572756236564624465}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.2}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.25, y: 1, z: 1}
   m_Children:
   - {fileID: 1572756236411971410}
   m_Father: {fileID: 0}
@@ -1912,12 +1912,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27f529c7fd5319f449a23735bbe5dc78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  faccingLeft: {x: -1, y: 1, z: 1}
-  faccingRight: {x: 1, y: 1, z: 1}
-  platformEdgeL: -5.5
-  platformEdgeR: 5.5
-  wallEdgeL: -8
-  wallEdgeR: 8
+  faccingLeft: {x: -1.25, y: 1, z: 1}
+  faccingRight: {x: 1.25, y: 1, z: 1}
+  platformEdgeL: -5.6
+  platformEdgeR: 5.6
+  wallEdgeL: -6.7
+  wallEdgeR: 6.7
   offScreenYPos: -6
   animator: {fileID: 1572756236564624469}
   sprite: {fileID: 1572756236564624465}
@@ -1971,7 +1971,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 6, y: 6}
+    oldSize: {x: 8, y: 6.5}
     newSize: {x: 1.8, y: 1.8}
     adaptiveTilingThreshold: 0.5
     drawMode: 1
