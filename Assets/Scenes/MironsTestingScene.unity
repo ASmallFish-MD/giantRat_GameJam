@@ -123,11 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!4 &166335844 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6479536743390998591, guid: 4654983d0942b0b4d8d2531a28a4aaff, type: 3}
-  m_PrefabInstance: {fileID: 6479536743258482011}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &231723124
 GameObject:
   m_ObjectHideFlags: 0
@@ -352,7 +347,6 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 166335844}
   - {fileID: 5151696462397219847}
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -392,7 +386,7 @@ GameObject:
   - component: {fileID: 1617988509}
   - component: {fileID: 1617988508}
   m_Layer: 0
-  m_Name: Plane
+  m_Name: Scolling Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -930,7 +924,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!61 &5151696461599513087
 BoxCollider2D:
@@ -1053,78 +1047,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5151696462397219841}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.12, y: 0.42, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 3.3365, y: -0.6383, z: 0}
+  m_LocalScale: {x: 0.453, y: 0.4634, z: 1}
   m_Children: []
   m_Father: {fileID: 898733831}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &6479536743258482011
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 898733831}
-    m_Modifications:
-    - target: {fileID: 4498613420667953426, guid: 4654983d0942b0b4d8d2531a28a4aaff, type: 3}
-      propertyPath: rockSize
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4498613420667953426, guid: 4654983d0942b0b4d8d2531a28a4aaff, type: 3}
-      propertyPath: rockPrefab
-      value: 
-      objectReference: {fileID: 6479536743390998591, guid: 4654983d0942b0b4d8d2531a28a4aaff, type: 3}
-    - target: {fileID: 6479536743390998585, guid: 4654983d0942b0b4d8d2531a28a4aaff, type: 3}
-      propertyPath: m_Name
-      value: FallingRock
-      objectReference: {fileID: 0}
-    - target: {fileID: 6479536743390998585, guid: 4654983d0942b0b4d8d2531a28a4aaff, type: 3}
-      propertyPath: m_TagString
-      value: Rock
-      objectReference: {fileID: 0}
-    - target: {fileID: 6479536743390998591, guid: 4654983d0942b0b4d8d2531a28a4aaff, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6479536743390998591, guid: 4654983d0942b0b4d8d2531a28a4aaff, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -3.38
-      objectReference: {fileID: 0}
-    - target: {fileID: 6479536743390998591, guid: 4654983d0942b0b4d8d2531a28a4aaff, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 5.87
-      objectReference: {fileID: 0}
-    - target: {fileID: 6479536743390998591, guid: 4654983d0942b0b4d8d2531a28a4aaff, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6479536743390998591, guid: 4654983d0942b0b4d8d2531a28a4aaff, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6479536743390998591, guid: 4654983d0942b0b4d8d2531a28a4aaff, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6479536743390998591, guid: 4654983d0942b0b4d8d2531a28a4aaff, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6479536743390998591, guid: 4654983d0942b0b4d8d2531a28a4aaff, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6479536743390998591, guid: 4654983d0942b0b4d8d2531a28a4aaff, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6479536743390998591, guid: 4654983d0942b0b4d8d2531a28a4aaff, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6479536743390998591, guid: 4654983d0942b0b4d8d2531a28a4aaff, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 4654983d0942b0b4d8d2531a28a4aaff, type: 3}
