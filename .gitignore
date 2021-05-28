@@ -8,6 +8,7 @@ Temp/
 UserSettings/
 .vscode/
 obj/
+Builds/
 
 # project files
 /Assembly-CSharp.csproj
