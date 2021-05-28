@@ -162,7 +162,7 @@ public class RockScript : MonoBehaviour{
             //rockPos.x = Mathf.Clamp(rockPos.x, platformLeftEdge + rockSize/2f, platformRightEdge - rockSize/2f);
             Transform spawnedRock = Instantiate(rockPrefab, rockPos, Quaternion.identity).transform;
             spawnedRock.GetComponent<RockScript>().rockSize = RockScript.size.Small;
-            spawnedRock.GetComponent<RockScript>().rockState = RockScript.state.OnPlatform;
+            spawnedRock.GetComponent<RockScript>().rockState = RockScript.state.FallingAfterGrab;
             spawnedRock.transform.SetParent(
                 GameObject.FindGameObjectWithTag("ActionableObjectsTransform").transform
             );
