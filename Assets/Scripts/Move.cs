@@ -7,8 +7,15 @@ public class Move : MonoBehaviour
 
     private CharacterController controller;
     
-    Vector3 faccingLeft = new Vector3(-0.3f, 0.3f, 0.3f);
-    Vector3 faccingRight = new Vector3(0.3f, 0.3f, 0.3f);
+    // because of bad coding practices these need to be changed if you want to change the sprite scale, sorry
+    private Vector3 faccingLeft = new Vector3(-0.3f, 0.3f, 0.3f);
+    private Vector3 faccingRight = new Vector3(0.3f, 0.3f, 0.3f);
+
+    // also because we've got no idea what we're doing, this is gonna be how we decide when the character falls off.
+    private float platformEdgeL;
+    private float platformEdgeR;
+    private float wallEdgeL;
+    private float wallEdgeR;
 
     private float maxSpeed = 0.3f;
     private float playerAcceleration = 0.05f;
@@ -32,15 +39,13 @@ public class Move : MonoBehaviour
         float xInput = Input.GetAxisRaw("Horizontal");
 
         if (xInput != 0 && !isOpposite(xInput, playerSpeed.x)) {
-            playerSpeed.x = min(xInput * Time.deltaTime * playerAcceleration + playerSpeed.x, maxSpeed);
-            
+            playerSpeed.x = min(xInput * Time.deltaTime * playerAcceleration + playerSpeed.x, maxSpeed); 
         } else {
             playerSpeed.x = max(-playerDeceleration * Time.deltaTime + playerSpeed.x, 0);
         }
 
+        // movement logic should occur before here
         animator.SetFloat("playerSpeed", Mathf.Abs(playerSpeed.x));
-
-        controller.Move(playerSpeed);
 
         if (xInput > 0 && !facingRight) {
             sprite.transform.localScale = faccingRight;
@@ -49,6 +54,8 @@ public class Move : MonoBehaviour
             sprite.transform.localScale = faccingLeft;
             facingRight = false;
         }
+
+        controller.Move(playerSpeed);
     }
 
     float min(float a, float b) {
