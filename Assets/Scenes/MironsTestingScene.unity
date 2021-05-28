@@ -606,7 +606,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0.6, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -732,7 +732,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 898733830}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5151696462397219847}
@@ -762,7 +762,7 @@ MonoBehaviour:
   rockPrefab: {fileID: 6479536743390998591, guid: 4654983d0942b0b4d8d2531a28a4aaff, type: 3}
   rockShadowLargePrefab: {fileID: 7491821470482911388, guid: 6fd1c30cb40e3c64da315eb3bfc4f01c, type: 3}
   rockShadowSmallPrefab: {fileID: 8275340505284637852, guid: 8ce8d26dc37c12e4cbe00bef4e213923, type: 3}
-  spawnYPos: 50
+  spawnYPos: 10
   smallRockSprites:
   - {fileID: 21300000, guid: e033385570fbce748889a277820e745e, type: 3}
   - {fileID: 21300000, guid: a6eb67ba1ce38894eba6550fa6d6264f, type: 3}
@@ -1052,7 +1052,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scrollSpeed: 1
   scrollDirection: {x: 0, y: -1}
-  BGtextureScale: 10
+  BGtextureScale: 4
 --- !u!23 &1617988509
 MeshRenderer:
   m_ObjectHideFlags: 0
