@@ -7,10 +7,10 @@ public class RockSpawner : MonoBehaviour{
     public float platformRightEdge;
     public float shadowYPos;
 
-    public float maxRockSize;
-    public float minRockSize;
+    public float rockSizePercentVariation = 15f;
 
-    public int nRockTypes;
+    public List<float> rockSizes; //1,3
+    public List<float> rockProbabilities; //50,50
 
     // Start is called before the first frame update
     void Start(){
@@ -23,16 +23,22 @@ public class RockSpawner : MonoBehaviour{
     }
 
     void spawnRock(){
-        //make smaller rocks more common by changing the random distribution
-        //by raising it to a power. Increase power to get larger rocks to be less common
-        //e.g. with 3 rock types, type 1 = 87% chance, 2 = 18%, 3 = 13%
-        float rand = Random.Range(0, 1);
-        float rockSize = minRockSize + (maxRockSize - minRockSize) * rand;
-        //limit the range of rock types, since random.range is inclusive with limits
-        int rockType = Mathf.Min((int)(rand * nRockTypes), nRockTypes);
+
+        int rockType = GetRandomWeightedIndex(rockProbabilities);
+        float randSizeMultiplier = 1f + (Random.Range(-1, 1) * rockSizePercentVariation / 100f);
+        float rockSize = randSizeMultiplier * rockSizes[rockType];
+        
+
         float xPos = getNewRockXPos(rockSize);
 
         //TODO: spawn rock here
+
+        if(rockType == 0){
+            //GetComponent<RockScript>().rockSize = RockScript.size.Small;
+        }else{
+            //GetComponent<RockScript>().rockSize = RockScript.size.Big;
+        }
+        
         return;
     }
 
