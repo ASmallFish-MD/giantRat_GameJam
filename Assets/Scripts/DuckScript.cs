@@ -8,6 +8,8 @@ public class DuckScript : MonoBehaviour{
     public float offScreenYPos = -10;
     public float offPlatformYPos = -2;
 
+    private float platformTopY;
+
     public enum state {
         OnPlatform,
         Grabbed,
@@ -24,6 +26,9 @@ public class DuckScript : MonoBehaviour{
     // Start is called before the first frame update
     void Start(){
         duckState = state.OnPlatform;
+
+        Transform platform = GameObject.FindGameObjectWithTag("Platform").transform;
+        platformTopY = platform.position.y + platform.localScale.y/2f + transform.localScale.y/2f;
     }
 
     // Update is called once per frame
@@ -41,6 +46,8 @@ public class DuckScript : MonoBehaviour{
     private void OnTriggerEnter2D(Collider2D other){
         if(duckState == state.FallingAfterGrab && other.CompareTag("Platform")){
             duckState = state.OnPlatform;
+
+            transform.position = new Vector2(transform.position.x, platformTopY); //reset y position
             //play hit platform sound
         }
     }
@@ -48,10 +55,19 @@ public class DuckScript : MonoBehaviour{
     public void reactToPlayerAction(){
         if(duckState == state.OnPlatform){
             duckState = state.Grabbed;
-            //parent itself to player
             //play pickup sound
+
+            //parent itself to player
+            transform.SetParent(
+                GameObject.FindGameObjectWithTag("Player").transform.Find("GrabSlot")
+            );
+            transform.localPosition = Vector3.zero;//reset position in players hand
         }else if(duckState == state.Grabbed){
             duckState = state.FallingAfterGrab;
+            //unparent itself to player
+            transform.SetParent(
+                GameObject.FindGameObjectWithTag("ActionableObjectsTransform").transform
+            );
         }
     }
 }

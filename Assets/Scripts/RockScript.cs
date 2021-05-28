@@ -16,8 +16,6 @@ public class RockScript : MonoBehaviour{
 
     public float distanceToSpawnSmallRockAt = 0.1f;
 
-    public Transform rockPrefab;
-
     public enum state {
         FallingOntoPlatform,
         OnPlatform,
@@ -36,6 +34,8 @@ public class RockScript : MonoBehaviour{
 
     public size rockSize;
 
+    private float platformTopY;
+
     //TODO
     //public sounds[]
     //THUD, falling onto platform, falling off platform (optional),
@@ -44,6 +44,9 @@ public class RockScript : MonoBehaviour{
     // Start is called before the first frame update
     void Start(){
         rockState = state.FallingOntoPlatform;
+
+        Transform platform = GameObject.FindGameObjectWithTag("Platform").transform;
+        platformTopY = platform.position.y + platform.localScale.y/2f + transform.localScale.y/2f;
     }
 
     // Update is called once per frame
@@ -72,6 +75,8 @@ public class RockScript : MonoBehaviour{
         }
         else if((rockState == state.FallingOntoPlatform || rockState == state.FallingAfterGrab) && other.CompareTag("Platform")){
             rockState = state.OnPlatform;
+            transform.position = new Vector2(transform.position.x, platformTopY); //reset y position
+
             //TODO:delete shadow
             //play thud sound
         }
