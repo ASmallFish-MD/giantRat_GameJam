@@ -39,7 +39,7 @@ public class DuckScript : MonoBehaviour{
     }
 
     private void OnTriggerEnter2D(Collider2D other){
-        else if(duckState == state.FallingAfterGrab && other.CompareTag("Platform")){
+        if(duckState == state.FallingAfterGrab && other.CompareTag("Platform")){
             duckState = state.OnPlatform;
             //play hit platform sound
         }
