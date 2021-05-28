@@ -74,7 +74,7 @@ public class Move : MonoBehaviour
 
         transform.Translate(playerSpeed);
 
-        if (Input.GetButton("Use")){
+        if (Input.GetButtonDown("Use")){
             PlayerAction.actionType actionTypeDone = this.GetComponent<PlayerAction>().performPlayerAction();
             if(actionTypeDone == PlayerAction.actionType.PickingUp){
                 //PickingUp animation
