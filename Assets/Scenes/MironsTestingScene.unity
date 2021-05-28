@@ -529,6 +529,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 794c5292576d27940a5b9dbdd0128600, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  platformLeftEdge: 0
+  platformRightEdge: 0
+  maxRockSize: 0
+  minRockSize: 0
+  nRockTypes: 0
 --- !u!1 &924982952
 GameObject:
   m_ObjectHideFlags: 0
@@ -998,11 +1003,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4458525246511465968, guid: 41162ff0521a16b4b8bb8e45efd91414, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.04
+      value: -3.38
       objectReference: {fileID: 0}
     - target: {fileID: 4458525246511465968, guid: 41162ff0521a16b4b8bb8e45efd91414, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.06
+      value: 5.87
       objectReference: {fileID: 0}
     - target: {fileID: 4458525246511465968, guid: 41162ff0521a16b4b8bb8e45efd91414, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1039,6 +1044,10 @@ PrefabInstance:
     - target: {fileID: 4458525246511465974, guid: 41162ff0521a16b4b8bb8e45efd91414, type: 3}
       propertyPath: m_Name
       value: FallingRock
+      objectReference: {fileID: 0}
+    - target: {fileID: 6510626515308500189, guid: 41162ff0521a16b4b8bb8e45efd91414, type: 3}
+      propertyPath: fallSpeed
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 41162ff0521a16b4b8bb8e45efd91414, type: 3}

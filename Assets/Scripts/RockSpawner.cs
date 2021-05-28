@@ -5,6 +5,7 @@ using UnityEngine;
 public class RockSpawner : MonoBehaviour{
     public float platformLeftEdge;
     public float platformRightEdge;
+    public float shadowYPos;
 
     public float maxRockSize;
     public float minRockSize;
