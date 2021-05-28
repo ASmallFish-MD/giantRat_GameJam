@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerAction : MonoBehaviour{
     public Transform GrabSlot;
 
-    public float grabRange = 1.5f;
+    public float actionRange = 1.5f;
 
     public enum actionType{
         Nothing,
@@ -80,9 +80,9 @@ public class PlayerAction : MonoBehaviour{
         //SortedList for storing the objects already in the level
         //keys = object x pos, values = object transform
 
-        //make a list of objects on the platform to grab
-        int nGrabbableObjects = actionableObjectsTransform.childCount;
-        for(int i = 0; i < nGrabbableObjects; i++){
+        //make a list of objects on the platform to perform actions on
+        int nActionableObjects = actionableObjectsTransform.childCount;
+        for(int i = 0; i < nActionableObjects; i++){
             Transform actionableObject = actionableObjectsTransform.GetChild(i);
             if(actionableObject.CompareTag("Rock") && actionableObject.GetComponent<RockScript>().rockState == RockScript.state.OnPlatform
                 || actionableObject.CompareTag("Duck") && actionableObject.GetComponent<DuckScript>().duckState == DuckScript.state.OnPlatform){
@@ -96,16 +96,16 @@ public class PlayerAction : MonoBehaviour{
 
         Transform closestObject = null;
 
-        //linear search through grabbable object list to find closest one
+        //linear search through actionable object list to find closest one
         if(facingRight){
             for (int i = 0; i < actionableObjects.Count; i++){
-                if(plrXPos <= actionableObjects.Keys[i] && actionableObjects.Keys[i] <= plrXPos + grabRange){
+                if(plrXPos <= actionableObjects.Keys[i] && actionableObjects.Keys[i] <= plrXPos + actionRange){
                     closestObject = actionableObjects.Values[i];
                 }
             }
         }else{ //if facing left, search in the reverse order
             for (int i = 0; i < actionableObjects.Count; i++){
-                if(plrXPos - grabRange <= actionableObjects.Keys[actionableObjects.Count-i-1] && actionableObjects.Keys[actionableObjects.Count-i-1] <= plrXPos){
+                if(plrXPos - actionRange <= actionableObjects.Keys[actionableObjects.Count-i-1] && actionableObjects.Keys[actionableObjects.Count-i-1] <= plrXPos){
                     closestObject = actionableObjects.Values[actionableObjects.Count-i-1];
                 }
             }
