@@ -87,6 +87,13 @@ public class RockSpawner : MonoBehaviour{
         //adjust shadow size to rock size
         spawnedRockShadow.transform.localScale = new Vector2(rockSize, spawnedRockShadow.transform.localScale.y); 
 
+        spawnedRockShadow.transform.SetParent(
+            GameObject.FindGameObjectWithTag("ActionableObjectsTransform").transform
+        );
+
+        //reset z position for showing in front of platform
+        spawnedRockShadow.transform.localPosition = new Vector3(spawnedRockShadow.transform.localPosition.x, spawnedRockShadow.transform.localPosition.y, 0f);
+
         //set shadow to start transparent
         Color shadowColour = spawnedRockShadow.GetComponent<SpriteRenderer>().color;
         shadowColour.a = 0f;
