@@ -73,6 +73,22 @@ public class Move : MonoBehaviour
         }
 
         controller.Move(playerSpeed);
+
+        if (Input.GetButton("Use")){
+            PlayerAction.actionType actionTypeDone = this.GetComponent<PlayerAction>().performPlayerAction();
+            if(actionTypeDone == PlayerAction.actionType.PickingUp){
+                //PickingUp animation
+            }
+            else if(actionTypeDone == PlayerAction.actionType.Dropping){
+                //Dropping animation
+            }
+            else if(actionTypeDone == PlayerAction.actionType.UsePickaxe){
+                //UsePickaxe animation
+            }
+            else if(actionTypeDone == PlayerAction.actionType.Nothing){
+                //TODO: optionally play a 'cant pickup' sound
+            }
+        }
     }
 
     float min(float a, float b) {
