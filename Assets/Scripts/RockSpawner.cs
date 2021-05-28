@@ -12,6 +12,10 @@ public class RockSpawner : MonoBehaviour{
     public List<float> rockSizes; //1,3
     public List<float> rockProbabilities; //50,50
 
+    public Transform rockPrefab;
+
+    public float spawnYPos = 50f;
+
     // Start is called before the first frame update
     void Start(){
         Transform platform = GameObject.FindGameObjectWithTag("Platform").transform;
@@ -21,7 +25,9 @@ public class RockSpawner : MonoBehaviour{
 
     // Update is called once per frame
     void Update(){
-        
+        if(Input.GetButtonDown("Fire2")){
+            spawnRock();
+        }
     }
 
     void spawnRock(){
@@ -33,12 +39,14 @@ public class RockSpawner : MonoBehaviour{
 
         float xPos = getNewRockXPos(rockSize);
 
-        //TODO: spawn rock here
+        //spawn a rock
+        Transform spawnedRock = Instantiate(rockPrefab, new Vector3(xPos, spawnYPos), Quaternion.identity);
+        spawnedRock.SetParent(this.gameObject.transform);
 
         if(rockType == 0){
-            //GetComponent<RockScript>().rockSize = RockScript.size.Small;
+            spawnedRock.GetComponent<RockScript>().rockSize = RockScript.size.Small;
         }else{
-            //GetComponent<RockScript>().rockSize = RockScript.size.Big;
+            spawnedRock.GetComponent<RockScript>().rockSize = RockScript.size.Big;
         }
         
         return;
