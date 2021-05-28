@@ -17,6 +17,8 @@ public class Move : MonoBehaviour
     public float wallEdgeL = -8;
     public float wallEdgeR = 8;
 
+    public float offScreenYPos = -6f;
+
     private float maxSpeed = 0.3f;
     private float playerAcceleration = 0.05f;
     private float playerDeceleration = 0.2f;
@@ -88,6 +90,10 @@ public class Move : MonoBehaviour
             else if(actionTypeDone == PlayerAction.actionType.Nothing){
                 //TODO: optionally play a 'cant pickup' sound
             }
+        }
+
+        if(transform.position.y < offScreenYPos){
+            FindObjectOfType<GameController>().EndGame("You have fallen");
         }
     }
 

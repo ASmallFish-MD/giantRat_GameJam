@@ -39,8 +39,10 @@ public class DuckScript : MonoBehaviour{
         if(duckState == state.FallingAfterGrab && transform.position.y < offPlatformYPos){
             duckState = state.FallingOffPlatform;
             //Play falling off sound (optional)
+            //todo
         }else if(duckState == state.FallingOffPlatform && transform.position.y < offScreenYPos){
-            //todo GAMEOVER
+            //GAMEOVER
+            FindObjectOfType<GameController>().EndGame("Your duck is lost forever in the depths");
         }
     }
 

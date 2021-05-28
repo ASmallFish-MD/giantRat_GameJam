@@ -88,9 +88,15 @@ public class RockScript : MonoBehaviour{
         Debug.Log(other.tag);
         if(rockState == state.FallingOntoPlatform && other.CompareTag("Player")){
             //GAME OVER due to player being conked
+            FindObjectOfType<GameController>().EndGame("You have been crushed");
         }
         else if(rockState == state.FallingOntoPlatform && other.CompareTag("Duck")){
             //GAME OVER due to duck being crushed
+            FindObjectOfType<GameController>().EndGame("Your duck has been crushed");
+        }
+        else if(rockState == state.FallingOntoPlatform && other.CompareTag("Rock")){
+            //GAME OVER due to rock stacking
+            FindObjectOfType<GameController>().EndGame("Your platform has suffered a catastrophic failure. Proboable cause: Rocks");
         }
         else if((rockState == state.FallingOntoPlatform || rockState == state.FallingAfterGrab) && other.CompareTag("Platform")){
             if(rockState == state.FallingOntoPlatform){
