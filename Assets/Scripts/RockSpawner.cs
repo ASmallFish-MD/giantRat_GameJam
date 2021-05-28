@@ -23,6 +23,9 @@ public class RockSpawner : MonoBehaviour{
 
     private float platformTopY;
 
+    public float delayBetweenRocks = 2f;
+    private float lastFallingRockTime = 0;
+
     // Start is called before the first frame update
     void Start(){
         Transform platform = GameObject.FindGameObjectWithTag("Platform").transform;
@@ -33,11 +36,23 @@ public class RockSpawner : MonoBehaviour{
 
     // Update is called once per frame
     void Update(){
+
+        if(checkForFallingRocks()){
+            lastFallingRockTime = Time.time;
+        }
+        
+        if(Time.time > lastFallingRockTime + delayBetweenRocks){
+            spawnRock();
+            lastFallingRockTime = Time.time;
+        }
+
+        //*
         if(Input.GetButtonDown("Fire2")){
             if(!checkForFallingRocks()){
                 spawnRock();
             }
         }
+        //*/
     }
 
     bool checkForFallingRocks(){
