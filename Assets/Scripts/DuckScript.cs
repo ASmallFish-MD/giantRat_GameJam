@@ -35,7 +35,8 @@ public class DuckScript : MonoBehaviour{
     void Update(){
         if(duckState == state.FallingAfterGrab || duckState == state.FallingOffPlatform){
             transform.Translate(Vector2.down * Time.deltaTime * fallSpeed);
-        }else if(duckState == state.FallingAfterGrab && transform.position.y < offPlatformYPos){
+        }
+        if(duckState == state.FallingAfterGrab && transform.position.y < offPlatformYPos){
             duckState = state.FallingOffPlatform;
             //Play falling off sound (optional)
         }else if(duckState == state.FallingOffPlatform && transform.position.y < offScreenYPos){
