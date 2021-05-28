@@ -75,7 +75,7 @@ public class RockScript : MonoBehaviour{
         }
     }
 
-    public void playerAction(){
+    public void reactToPlayerAction(){
         if(rockState == state.OnPlatform){
             if(rockSize == size.Small){
                 rockState = state.Grabbed;
