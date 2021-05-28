@@ -86,8 +86,11 @@ public class PlayerAction : MonoBehaviour{
             Transform actionableObject = actionableObjectsTransform.GetChild(i);
             if(actionableObject.CompareTag("Rock") && actionableObject.GetComponent<RockScript>().rockState == RockScript.state.OnPlatform
                 || actionableObject.CompareTag("Duck") && actionableObject.GetComponent<DuckScript>().duckState == DuckScript.state.OnPlatform){
-                actionableObjects.Add(actionableObject.position.x, actionableObject);
-                Debug.Log(actionableObject);
+                
+                if(!actionableObjects.ContainsKey(actionableObject.position.x)){ //stored list cant containt 2 items with same key, ignore if 2 objects with same x pos
+                    actionableObjects.Add(actionableObject.position.x, actionableObject);
+                    Debug.Log(actionableObject);
+                }
             }
         }
 
