@@ -60,7 +60,8 @@ public class RockScript : MonoBehaviour{
         }
     }
 
-    private void OnTriggerEnter(Collider other){
+    private void OnTriggerEnter2D(Collider2D other){
+        Debug.Log(other.tag);
         if(rockState == state.FallingOntoPlatform && other.CompareTag("Player")){
             //GAME OVER due to player being conked
         }
