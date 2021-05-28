@@ -14,7 +14,9 @@ public class RockScript : MonoBehaviour{
     public float offScreenYPos = -10;
     public float offPlatformYPos = -2;
 
-    
+    public float distanceToSpawnSmallRockAt = 0.1f;
+
+    public Transform rockPrefab;
 
     public enum state {
         FallingOntoPlatform,
@@ -82,9 +84,17 @@ public class RockScript : MonoBehaviour{
                 //parent itself to player
                 //play pickup sound
             }else if(rockSize == size.Big){
-                //Play pickaxe and rock break sound
-                //TODO:spawn 2 small rock
+                //TODO Play pickaxe and rock break sound
+
+                //spawn 2 small rock
+                Transform smallRock1 = Instantiate(rockPrefab, transform.position + new Vector3(distanceToSpawnSmallRockAt, 0), Quaternion.identity);
+                Transform smallRock2 = Instantiate(rockPrefab, transform.position - new Vector3(distanceToSpawnSmallRockAt, 0), Quaternion.identity);
+                
+                smallRock1.GetComponent<RockScript>().rockSize = RockScript.size.Small;
+                smallRock2.GetComponent<RockScript>().rockSize = RockScript.size.Small;
+
                 //Delete self
+                Object.Destroy(this.gameObject);
             }
         }else if(rockState == state.Grabbed){
             rockState = state.FallingAfterGrab;
