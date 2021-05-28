@@ -46,7 +46,7 @@ public class RockScript : MonoBehaviour{
 
     // Update is called once per frame
     void Update(){
-        if(rockState == state.FallingOntoPlatform || rockState == state.FallingAfterGrab){
+        if(rockState == state.FallingOntoPlatform || rockState == state.FallingAfterGrab || rockState == state.FallingOffPlatform){
             transform.Translate(Vector2.down * Time.deltaTime * fallSpeed);
         }else if(rockState == state.FallingAfterGrab && transform.position.y < offPlatformYPos){
             rockState = state.FallingOffPlatform;
@@ -68,7 +68,7 @@ public class RockScript : MonoBehaviour{
         else if(rockState == state.FallingOntoPlatform && other.CompareTag("Duck")){
             //GAME OVER due to duck being crushed
         }
-        else if(rockState == state.FallingOntoPlatform && other.CompareTag("Platform")){
+        else if((rockState == state.FallingOntoPlatform || rockState == state.FallingAfterGrab) && other.CompareTag("Platform")){
             rockState = state.OnPlatform;
             //TODO:delete shadow
             //play thud sound
