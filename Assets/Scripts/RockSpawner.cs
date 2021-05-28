@@ -48,19 +48,21 @@ public class RockSpawner : MonoBehaviour{
     //this function randomly decides where to spawn the next falling rock,
     //avoiding the rocks already in the level
     float getNewRockXPos(float newRockWidth){
-        int nRocks = this.gameObject.transform.childCount;
+        int nActionableObjects = this.gameObject.transform.childCount;
 
         //https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.sortedlist-2?view=net-5.0
         SortedList<float, float> rocks = new SortedList<float, float>();
         //SortedList for storing the rocks already in the level
         //keys = rock x pos, values = rock width
 
-        for(int i = 0; i < nRocks; i++){
-            Transform rock = this.gameObject.transform.GetChild(i);
-            if(rock.GetComponent<RockScript>().rockState == RockScript.state.OnPlatform){
-                float rockXPos = rock.position.x;
-                float rockWidth = rock.localScale.x;
-                rocks.Add(rockXPos, rockWidth);
+        for(int i = 0; i < nActionableObjects; i++){
+            Transform actionableObject = this.gameObject.transform.GetChild(i);
+            if(actionableObject.CompareTag("Rock")){
+                if(actionableObject.GetComponent<RockScript>().rockState == RockScript.state.OnPlatform){
+                    float rockXPos = actionableObject.position.x;
+                    float rockWidth = actionableObject.localScale.x;
+                    rocks.Add(rockXPos, rockWidth);
+                }
             }
         }
 
@@ -73,16 +75,16 @@ public class RockSpawner : MonoBehaviour{
         List<float> usableSegmentLeftEdge = new List<float>();
         List<float> usableSegmentRightEdge = new List<float>();
         List<float> usableSegmentLengths = new List<float>();
-        for(int i = 0; i < nRocks+1; i++){ // for n rocks, there's n+1 segments between them
+        for(int i = 0; i < rocks.Count-1; i++){ // for n rocks, there's n+1 segments between them
             //a usable segment starts at a rock y position + half it width and half the new rock width
             //it ends at the next rock's y position - half it width and half the new rock width
-            usableSegmentLeftEdge[i] = rocks.Keys[i] + rocks.Values[i]/2 + newRockWidth/2;
-            usableSegmentRightEdge[i] = rocks.Keys[i+1] - rocks.Values[i+1]/2 - newRockWidth/2;
+            usableSegmentLeftEdge.Add(rocks.Keys[i] + rocks.Values[i]/2f + newRockWidth/2f);
+            usableSegmentRightEdge.Add(rocks.Keys[i+1] - rocks.Values[i+1]/2f - newRockWidth/2f);
             //the left and right edge might swap sides. This means there is no usable segment
-            usableSegmentLengths[i] = Mathf.Max(usableSegmentRightEdge[i] - usableSegmentLeftEdge[i], 0);
+            usableSegmentLengths.Add(Mathf.Max(usableSegmentRightEdge[i] - usableSegmentLeftEdge[i], 0));
         }
 
-        if(sumList(usableSegmentLengths) > 0.01){ //if usable segments are available
+        if(sumList(usableSegmentLengths) > 0.01f){ //if usable segments are available
             //randomly pick a segment, weighted by it's length
             int segmentN = GetRandomWeightedIndex(usableSegmentLengths);
             //return a random position along it's length
@@ -90,6 +92,7 @@ public class RockSpawner : MonoBehaviour{
         }
         else{ //if no usable segments available
             //spawn a rock in a random position
+            Debug.Log("no space on platform, spawnning rock at random position");
             return Random.Range(platformLeftEdge, platformRightEdge);
         }
     }
