@@ -29,8 +29,8 @@ public class Move : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        controller = gameObject.AddComponent<CharacterController>();
-        controller.detectCollisions = true;
+        //controller = gameObject.AddComponent<CharacterController>();
+        //controller.detectCollisions = true;
     }
 
     // Update is called once per frame
@@ -72,7 +72,7 @@ public class Move : MonoBehaviour
             facingRight = false;
         }
 
-        controller.Move(playerSpeed);
+        transform.Translate(playerSpeed);
 
         if (Input.GetButton("Use")){
             PlayerAction.actionType actionTypeDone = this.GetComponent<PlayerAction>().performPlayerAction();
