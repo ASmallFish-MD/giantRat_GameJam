@@ -55,9 +55,11 @@ public class RockSpawner : MonoBehaviour{
 
         for(int i = 0; i < nRocks; i++){
             Transform rock = this.gameObject.transform.GetChild(i);
-            float rockXPos = rock.position.x;
-            float rockWidth = rock.localScale.x;
-            rocks.Add(rockXPos, rockWidth);
+            if(rock.GetComponent<RockScript>().rockState == RockScript.state.OnPlatform){
+                float rockXPos = rock.position.x;
+                float rockWidth = rock.localScale.x;
+                rocks.Add(rockXPos, rockWidth);
+            }
         }
 
         rocks.Add(platformLeftEdge, 0);  //add edges, represented as rocks with 0 width
