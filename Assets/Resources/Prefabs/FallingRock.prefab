@@ -108,7 +108,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: e033385570fbce748889a277820e745e, type: 3}
   - {fileID: 21300000, guid: a6eb67ba1ce38894eba6550fa6d6264f, type: 3}
   - {fileID: 21300000, guid: 06e6865195bf5ab4bbbf9c67ef394ec2, type: 3}
-  rockState: 0
+  rockState: 3
   rockSize: 1
 --- !u!50 &6479536743836896763
 Rigidbody2D:
@@ -141,7 +141,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
