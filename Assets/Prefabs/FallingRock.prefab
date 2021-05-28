@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6479536743836896711}
   m_Layer: 0
   m_Name: FallingRock
-  m_TagString: Untagged
+  m_TagString: Rock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -101,6 +101,8 @@ MonoBehaviour:
   shadow: {fileID: 0}
   offScreenYPos: -10
   offPlatformYPos: -2
+  distanceToSpawnSmallRockAt: 0.1
+  rockPrefab: {fileID: 0}
   rockState: 0
   rockSize: 0
 --- !u!50 &6479536743836896763
