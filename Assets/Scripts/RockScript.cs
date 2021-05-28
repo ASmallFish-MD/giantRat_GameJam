@@ -52,8 +52,6 @@ public class RockScript : MonoBehaviour{
 
     // Start is called before the first frame update
     void Start(){
-        rockState = state.FallingOntoPlatform;
-
         Transform platform = GameObject.FindGameObjectWithTag("Platform").transform;
         platformTopY = platform.position.y + platform.localScale.y/2f + transform.localScale.y/2f;
         platformLeftEdge = platform.position.x - platform.localScale.x/2f;
@@ -112,6 +110,7 @@ public class RockScript : MonoBehaviour{
             
 
             //play thud sound
+            //todo
         }
     }
 
@@ -128,7 +127,8 @@ public class RockScript : MonoBehaviour{
                 transform.localPosition = Vector3.zero;//reset position in players hand
             }else if(rockSize == size.Big){
                 rockState = state.BeingBroken;
-                //TODO Play pickaxe and rock break sound
+                //Play pickaxe and rock break sound
+                //TODO
 
                 //spawn 2 small rocks
                 spawnSmallRocks();
@@ -150,18 +150,19 @@ public class RockScript : MonoBehaviour{
         var rockPrefab = Resources.Load<Transform>("Prefabs/FallingRock");
         float randSizeMultiplier;
         float rockSize;
+        Vector3 rockPos;
 
         float[] smallRockOffsets = {+1f, -1f};
 
         for (int i = 0; i < 2; i++){
             randSizeMultiplier = 1f + (Random.Range(-1f, 1f) * rockSizePercentVariation / 100f);
             rockSize = randSizeMultiplier * smallRockSize;
-            Vector3 rockPos = transform.position + Vector3.right * distanceToSpawnSmallRockAt * smallRockOffsets[i];
+            rockPos = transform.position + Vector3.right * distanceToSpawnSmallRockAt * smallRockOffsets[i];
             //clamp new small rock position so it doesnt fly off the edge?
             //rockPos.x = Mathf.Clamp(rockPos.x, platformLeftEdge + rockSize/2f, platformRightEdge - rockSize/2f);
             Transform spawnedRock = Instantiate(rockPrefab, rockPos, Quaternion.identity).transform;
             spawnedRock.GetComponent<RockScript>().rockSize = RockScript.size.Small;
-            spawnedRock.GetComponent<RockScript>().rockState = RockScript.state.FallingAfterGrab;
+            spawnedRock.GetComponent<RockScript>().rockState = RockScript.state.OnPlatform;
             spawnedRock.transform.SetParent(
                 GameObject.FindGameObjectWithTag("ActionableObjectsTransform").transform
             );
