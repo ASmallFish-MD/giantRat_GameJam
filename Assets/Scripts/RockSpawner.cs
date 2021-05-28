@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class RockSpawner : MonoBehaviour{
-    public float platformLeftEdge;
-    public float platformRightEdge;
+    private float platformLeftEdge;
+    private float platformRightEdge;
     public float shadowYPos;
 
     public float rockSizePercentVariation = 15f;
@@ -14,7 +14,9 @@ public class RockSpawner : MonoBehaviour{
 
     // Start is called before the first frame update
     void Start(){
-        
+        Transform platform = GameObject.FindGameObjectWithTag("Platform").transform;
+        platformLeftEdge = platform.position.x - platform.localScale.x/2f;
+        platformRightEdge = platform.position.x + platform.localScale.x/2f;
     }
 
     // Update is called once per frame
