@@ -21,7 +21,8 @@ public class RockScript : MonoBehaviour{
         OnPlatform,
         Grabbed,
         FallingAfterGrab, //this may or may not be falling off the platform
-        FallingOffPlatform //this is falling off the platform
+        FallingOffPlatform, //this is falling off the platform
+        BeingBroken
     }
 
     public state rockState;
@@ -86,23 +87,41 @@ public class RockScript : MonoBehaviour{
         if(rockState == state.OnPlatform){
             if(rockSize == size.Small){
                 rockState = state.Grabbed;
-                //parent itself to player
                 //play pickup sound
+
+                //parent itself to player
+                transform.SetParent(
+                    GameObject.FindGameObjectWithTag("Player").transform.Find("GrabSlot")
+                );
+                transform.localPosition = Vector3.zero;//reset position in players hand
             }else if(rockSize == size.Big){
+                rockState = state.BeingBroken;
                 //TODO Play pickaxe and rock break sound
 
                 //spawn 2 small rock
-                Transform smallRock1 = Instantiate(rockPrefab, transform.position + new Vector3(distanceToSpawnSmallRockAt, 0), Quaternion.identity);
-                Transform smallRock2 = Instantiate(rockPrefab, transform.position - new Vector3(distanceToSpawnSmallRockAt, 0), Quaternion.identity);
-                
+                var rockPrefab = Resources.Load<Transform>("Prefabs/FallingRock");
+                Transform smallRock1 = Instantiate(rockPrefab, transform.position + new Vector3(distanceToSpawnSmallRockAt, 0), Quaternion.identity).transform;
+                Transform smallRock2 = Instantiate(rockPrefab, transform.position - new Vector3(distanceToSpawnSmallRockAt, 0), Quaternion.identity).transform;
+
                 smallRock1.GetComponent<RockScript>().rockSize = RockScript.size.Small;
                 smallRock2.GetComponent<RockScript>().rockSize = RockScript.size.Small;
 
+                smallRock1.transform.SetParent(
+                    GameObject.FindGameObjectWithTag("ActionableObjectsTransform").transform
+                );
+                smallRock2.transform.SetParent(
+                    GameObject.FindGameObjectWithTag("ActionableObjectsTransform").transform
+                );
+
                 //Delete self
-                Object.Destroy(this.gameObject);
+                Object.Destroy(gameObject);
             }
         }else if(rockState == state.Grabbed){
             rockState = state.FallingAfterGrab;
+            //unparent itself to player
+            transform.SetParent(
+                GameObject.FindGameObjectWithTag("ActionableObjectsTransform").transform
+            );
         }
     }
 }
