@@ -13,15 +13,20 @@ public class RockSpawner : MonoBehaviour{
     public List<float> rockProbabilities; //50,50
 
     public Transform rockPrefab;
+    public Transform rockShadowLargePrefab;
+    public Transform rockShadowSmallPrefab;
 
     public float spawnYPos = 50f;
 
     public List<Sprite> smallRockSprites;
     public List<Sprite> bigRockSprites;
 
+    private float platformTopY;
+
     // Start is called before the first frame update
     void Start(){
         Transform platform = GameObject.FindGameObjectWithTag("Platform").transform;
+        platformTopY = platform.position.y + platform.localScale.y/2f;
         platformLeftEdge = platform.position.x - platform.localScale.x/2f;
         platformRightEdge = platform.position.x + platform.localScale.x/2f;
     }
@@ -65,13 +70,29 @@ public class RockSpawner : MonoBehaviour{
 
         spawnedRock.transform.localScale = new Vector2(rockSize, rockSize);
 
+        Transform spawnedRockShadow;
+
         if(rockType == 0){
             spawnedRock.GetComponent<RockScript>().rockSize = RockScript.size.Small;
             spawnedRock.GetComponent<SpriteRenderer>().sprite = smallRockSprites[Random.Range(0, smallRockSprites.Count)];
+            //spawn shadow
+            spawnedRockShadow = Instantiate(rockShadowSmallPrefab, new Vector3(xPos, shadowYPos), Quaternion.identity);
         }else{
             spawnedRock.GetComponent<RockScript>().rockSize = RockScript.size.Big;
             spawnedRock.GetComponent<SpriteRenderer>().sprite = bigRockSprites[Random.Range(0, bigRockSprites.Count)];
+            //spawn shadow
+            spawnedRockShadow = Instantiate(rockShadowLargePrefab, new Vector3(xPos, shadowYPos), Quaternion.identity);
         }
+
+        //adjust shadow size to rock size
+        spawnedRockShadow.transform.localScale = new Vector2(rockSize, spawnedRockShadow.transform.localScale.y); 
+
+        //set shadow to start transparent
+        Color shadowColour = spawnedRockShadow.GetComponent<SpriteRenderer>().color;
+        shadowColour.a = 0f;
+        spawnedRockShadow.GetComponent<SpriteRenderer>().color = shadowColour;
+        
+        spawnedRock.GetComponent<RockScript>().shadow = spawnedRockShadow;//pass reference of shadow to rock
         
         return;
     }

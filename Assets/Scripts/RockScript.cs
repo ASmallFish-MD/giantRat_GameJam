@@ -9,7 +9,7 @@ using UnityEngine;
 public class RockScript : MonoBehaviour{
 
     public float fallSpeed = 10f;
-    public GameObject shadow;
+    public Transform shadow;
 
     public float offScreenYPos = -10;
     public float offPlatformYPos = -2;
@@ -72,8 +72,15 @@ public class RockScript : MonoBehaviour{
             Object.Destroy(gameObject);
         }
 
-        if(rockState == state.FallingOntoPlatform){
+        if(rockState == state.FallingOntoPlatform && shadow != null){
             //update shadow
+            float distanceToPlatform = transform.position.y - platformTopY;
+
+            Color shadowColour = shadow.GetComponent<SpriteRenderer>().color;
+            //shadowColour.a = Mathf.Clamp01(1f/(1f+distanceToPlatform/3f)-0.2f); //opacity is inverely proportional to distance
+            shadowColour.a = Mathf.Clamp01(1f-distanceToPlatform/100f); //opacity is proportional to distance
+            shadow.GetComponent<SpriteRenderer>().color = shadowColour;
+
         }
     }
 
@@ -86,10 +93,18 @@ public class RockScript : MonoBehaviour{
             //GAME OVER due to duck being crushed
         }
         else if((rockState == state.FallingOntoPlatform || rockState == state.FallingAfterGrab) && other.CompareTag("Platform")){
+            if(rockState == state.FallingOntoPlatform){
+                //delete shadow
+                if(shadow != null){
+                    Object.Destroy(shadow.gameObject);
+                }
+            }
+
             rockState = state.OnPlatform;
             transform.position = new Vector2(transform.position.x, platformTopY); //reset y position
 
-            //TODO:delete shadow
+            
+
             //play thud sound
         }
     }
@@ -140,6 +155,7 @@ public class RockScript : MonoBehaviour{
             //rockPos.x = Mathf.Clamp(rockPos.x, platformLeftEdge + rockSize/2f, platformRightEdge - rockSize/2f);
             Transform spawnedRock = Instantiate(rockPrefab, rockPos, Quaternion.identity).transform;
             spawnedRock.GetComponent<RockScript>().rockSize = RockScript.size.Small;
+            spawnedRock.GetComponent<RockScript>().rockState = RockScript.state.FallingAfterGrab;
             spawnedRock.transform.SetParent(
                 GameObject.FindGameObjectWithTag("ActionableObjectsTransform").transform
             );
