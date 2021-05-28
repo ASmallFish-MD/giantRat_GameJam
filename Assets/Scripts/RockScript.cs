@@ -16,6 +16,12 @@ public class RockScript : MonoBehaviour{
 
     public float distanceToSpawnSmallRockAt = 0.1f;
 
+    public float rockSizePercentVariation = 15f;
+
+    public float smallRockSize = 1f;
+
+    public List<Sprite> smallRockSprites;
+
     public enum state {
         FallingOntoPlatform,
         OnPlatform,
@@ -36,6 +42,8 @@ public class RockScript : MonoBehaviour{
     public size rockSize;
 
     private float platformTopY;
+    private float platformLeftEdge;
+    private float platformRightEdge;
 
     //TODO
     //public sounds[]
@@ -48,17 +56,20 @@ public class RockScript : MonoBehaviour{
 
         Transform platform = GameObject.FindGameObjectWithTag("Platform").transform;
         platformTopY = platform.position.y + platform.localScale.y/2f + transform.localScale.y/2f;
+        platformLeftEdge = platform.position.x - platform.localScale.x/2f;
+        platformRightEdge = platform.position.x + platform.localScale.x/2f;
     }
 
     // Update is called once per frame
     void Update(){
         if(rockState == state.FallingOntoPlatform || rockState == state.FallingAfterGrab || rockState == state.FallingOffPlatform){
             transform.Translate(Vector2.down * Time.deltaTime * fallSpeed);
-        }else if(rockState == state.FallingAfterGrab && transform.position.y < offPlatformYPos){
+        }
+        if(rockState == state.FallingAfterGrab && transform.position.y < offPlatformYPos){
             rockState = state.FallingOffPlatform;
             //Play falling off sound (optional)
         }else if(rockState == state.FallingOffPlatform && transform.position.y < offScreenYPos){
-            //todo destroy
+            Object.Destroy(gameObject);
         }
 
         if(rockState == state.FallingOntoPlatform){
