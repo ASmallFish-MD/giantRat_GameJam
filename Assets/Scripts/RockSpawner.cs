@@ -16,6 +16,9 @@ public class RockSpawner : MonoBehaviour{
 
     public float spawnYPos = 50f;
 
+    public List<Sprite> smallRockSprites;
+    public List<Sprite> bigRockSprites;
+
     // Start is called before the first frame update
     void Start(){
         Transform platform = GameObject.FindGameObjectWithTag("Platform").transform;
@@ -26,7 +29,6 @@ public class RockSpawner : MonoBehaviour{
     // Update is called once per frame
     void Update(){
         if(Input.GetButtonDown("Fire2")){
-            spawnRock();
             if(!checkForFallingRocks()){
                 spawnRock();
             }
@@ -65,8 +67,10 @@ public class RockSpawner : MonoBehaviour{
 
         if(rockType == 0){
             spawnedRock.GetComponent<RockScript>().rockSize = RockScript.size.Small;
+            spawnedRock.GetComponent<SpriteRenderer>().sprite = smallRockSprites[Random.Range(0, smallRockSprites.Count)];
         }else{
             spawnedRock.GetComponent<RockScript>().rockSize = RockScript.size.Big;
+            spawnedRock.GetComponent<SpriteRenderer>().sprite = bigRockSprites[Random.Range(0, bigRockSprites.Count)];
         }
         
         return;
