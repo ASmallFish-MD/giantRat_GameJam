@@ -27,7 +27,24 @@ public class RockSpawner : MonoBehaviour{
     void Update(){
         if(Input.GetButtonDown("Fire2")){
             spawnRock();
+            if(!checkForFallingRocks()){
+                spawnRock();
+            }
         }
+    }
+
+    bool checkForFallingRocks(){
+        int nActionableObjects = this.gameObject.transform.childCount;
+
+        for(int i = 0; i < nActionableObjects; i++){
+            Transform actionableObject = this.gameObject.transform.GetChild(i);
+            if(actionableObject.CompareTag("Rock")){
+                if(actionableObject.GetComponent<RockScript>().rockState == RockScript.state.FallingOntoPlatform){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     void spawnRock(){
