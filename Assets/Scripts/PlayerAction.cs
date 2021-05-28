@@ -7,6 +7,8 @@ public class PlayerAction : MonoBehaviour{
 
     public float actionRange = 1.5f;
 
+    public Animator animator;
+
     public enum actionType{
         Nothing,
         Dropping,
@@ -29,11 +31,14 @@ public class PlayerAction : MonoBehaviour{
 
         if(holding){
             actionableObject = GrabSlot.GetChild(0);
+            animator.SetBool("isHolding", false);
         }else{
             actionableObject = getClosestObject();
+            animator.SetBool("isHolding", true);
         }
 
         if(actionableObject == null){
+            animator.SetBool("isHolding", false);
             return actionType.Nothing;
         }
 
@@ -44,6 +49,7 @@ public class PlayerAction : MonoBehaviour{
                 return actionType.Nothing;
             }else{
                 if(rockScript.rockSize == RockScript.size.Big){
+                    animator.SetBool("isHolding", false);
                     returnAction = actionType.UsePickaxe;
                 }else if(rockScript.rockSize == RockScript.size.Small){
                     if(!holding){
