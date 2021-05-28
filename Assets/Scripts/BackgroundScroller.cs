@@ -10,12 +10,20 @@ public class BackgroundScroller : MonoBehaviour {
     private Renderer renderer;
     private Vector2 offset = new Vector2(0, 0);
 
+    public float BGtextureScale = 10f;
+
     void Start(){
         renderer = GetComponent<Renderer> ();
+        //Maintain 1:1 aspect ratio
+        renderer.sharedMaterial.SetTextureScale(
+            "_MainTex",
+            new Vector2(transform.localScale.x, transform.localScale.y) / BGtextureScale
+        );
     }
 
     void Update(){
-        offset += scrollDirection * Time.deltaTime * scrollSpeed;
+        //the offset works in the opposite direction as normal translate, so minus
+        offset -= scrollDirection * Time.deltaTime * scrollSpeed / BGtextureScale;
         offset.x = Mathf.Repeat(offset.x, 1);
         offset.y = Mathf.Repeat(offset.y, 1);
         renderer.sharedMaterial.SetTextureOffset("_MainTex", offset);
