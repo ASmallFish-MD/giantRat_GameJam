@@ -101,10 +101,9 @@ MonoBehaviour:
   shadow: {fileID: 0}
   offScreenYPos: -10
   offPlatformYPos: -2
-  distanceToSpawnSmallRockAt: 0.1
-  rockPrefab: {fileID: 0}
+  distanceToSpawnSmallRockAt: 0.6
   rockState: 0
-  rockSize: 0
+  rockSize: 1
 --- !u!50 &6479536743836896763
 Rigidbody2D:
   serializedVersion: 4
