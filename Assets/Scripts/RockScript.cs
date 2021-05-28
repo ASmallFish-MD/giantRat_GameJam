@@ -98,20 +98,8 @@ public class RockScript : MonoBehaviour{
                 rockState = state.BeingBroken;
                 //TODO Play pickaxe and rock break sound
 
-                //spawn 2 small rock
-                var rockPrefab = Resources.Load<Transform>("Prefabs/FallingRock");
-                Transform smallRock1 = Instantiate(rockPrefab, transform.position + new Vector3(distanceToSpawnSmallRockAt, 0), Quaternion.identity).transform;
-                Transform smallRock2 = Instantiate(rockPrefab, transform.position - new Vector3(distanceToSpawnSmallRockAt, 0), Quaternion.identity).transform;
-
-                smallRock1.GetComponent<RockScript>().rockSize = RockScript.size.Small;
-                smallRock2.GetComponent<RockScript>().rockSize = RockScript.size.Small;
-
-                smallRock1.transform.SetParent(
-                    GameObject.FindGameObjectWithTag("ActionableObjectsTransform").transform
-                );
-                smallRock2.transform.SetParent(
-                    GameObject.FindGameObjectWithTag("ActionableObjectsTransform").transform
-                );
+                //spawn 2 small rocks
+                spawnSmallRocks();
 
                 //Delete self
                 Object.Destroy(gameObject);
@@ -123,5 +111,31 @@ public class RockScript : MonoBehaviour{
                 GameObject.FindGameObjectWithTag("ActionableObjectsTransform").transform
             );
         }
+    }
+
+    void spawnSmallRocks(){
+
+        var rockPrefab = Resources.Load<Transform>("Prefabs/FallingRock");
+        float randSizeMultiplier;
+        float rockSize;
+
+        float[] smallRockOffsets = {+1f, -1f};
+
+        for (int i = 0; i < 2; i++){
+            randSizeMultiplier = 1f + (Random.Range(-1f, 1f) * rockSizePercentVariation / 100f);
+            rockSize = randSizeMultiplier * smallRockSize;
+            Vector3 rockPos = transform.position + Vector3.right * distanceToSpawnSmallRockAt * smallRockOffsets[i];
+            //clamp new small rock position so it doesnt fly off the edge?
+            //rockPos.x = Mathf.Clamp(rockPos.x, platformLeftEdge + rockSize/2f, platformRightEdge - rockSize/2f);
+            Transform spawnedRock = Instantiate(rockPrefab, rockPos, Quaternion.identity).transform;
+            spawnedRock.GetComponent<RockScript>().rockSize = RockScript.size.Small;
+            spawnedRock.transform.SetParent(
+                GameObject.FindGameObjectWithTag("ActionableObjectsTransform").transform
+            );
+            spawnedRock.transform.localScale = new Vector2(rockSize, rockSize);
+            spawnedRock.GetComponent<SpriteRenderer>().sprite = smallRockSprites[Random.Range(0, smallRockSprites.Count)];
+        }
+        
+        return;
     }
 }
