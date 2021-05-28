@@ -53,7 +53,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1778288830226ba42ad690f7124e882e, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
+  m_DrawMode: 1
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
@@ -102,6 +102,12 @@ MonoBehaviour:
   offScreenYPos: -10
   offPlatformYPos: -2
   distanceToSpawnSmallRockAt: 0.6
+  rockSizePercentVariation: 15
+  smallRockSize: 1
+  smallRockSprites:
+  - {fileID: 21300000, guid: e033385570fbce748889a277820e745e, type: 3}
+  - {fileID: 21300000, guid: a6eb67ba1ce38894eba6550fa6d6264f, type: 3}
+  - {fileID: 21300000, guid: 06e6865195bf5ab4bbbf9c67ef394ec2, type: 3}
   rockState: 0
   rockSize: 1
 --- !u!50 &6479536743836896763
@@ -145,7 +151,7 @@ BoxCollider2D:
     oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
-    drawMode: 0
+    drawMode: 1
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
