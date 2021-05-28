@@ -33,7 +33,7 @@ public class RockSpawner : MonoBehaviour{
     void spawnRock(){
 
         int rockType = GetRandomWeightedIndex(rockProbabilities);
-        float randSizeMultiplier = 1f + (Random.Range(-1, 1) * rockSizePercentVariation / 100f);
+        float randSizeMultiplier = 1f + (Random.Range(-1f, 1f) * rockSizePercentVariation / 100f);
         float rockSize = randSizeMultiplier * rockSizes[rockType];
         
 
@@ -41,7 +41,10 @@ public class RockSpawner : MonoBehaviour{
 
         //spawn a rock
         Transform spawnedRock = Instantiate(rockPrefab, new Vector3(xPos, spawnYPos), Quaternion.identity);
+
         spawnedRock.SetParent(this.gameObject.transform);
+
+        spawnedRock.transform.localScale = new Vector2(rockSize, rockSize);
 
         if(rockType == 0){
             spawnedRock.GetComponent<RockScript>().rockSize = RockScript.size.Small;
