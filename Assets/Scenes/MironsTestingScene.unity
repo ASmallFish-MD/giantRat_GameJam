@@ -969,6 +969,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FallingRock
       objectReference: {fileID: 0}
+    - target: {fileID: 6479536743390998585, guid: 4654983d0942b0b4d8d2531a28a4aaff, type: 3}
+      propertyPath: m_TagString
+      value: Rock
+      objectReference: {fileID: 0}
     - target: {fileID: 6479536743390998591, guid: 4654983d0942b0b4d8d2531a28a4aaff, type: 3}
       propertyPath: m_RootOrder
       value: 0
