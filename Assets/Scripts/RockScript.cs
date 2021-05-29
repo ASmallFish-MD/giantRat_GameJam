@@ -33,7 +33,13 @@ public class RockScript : MonoBehaviour{
 
     public state rockState;
 
+    public AudioClip pickaxeSound;
+    public AudioClip rockBreak;
+    // public AudioClip rockFall;
+    public AudioClip rockImpact;
+    public AudioClip rockPickup;
 
+    private AudioSource audioSrc;
 
     public enum size {
         Big, Small
@@ -56,6 +62,8 @@ public class RockScript : MonoBehaviour{
         platformTopY = platform.position.y + platform.localScale.y/2f + transform.localScale.y/2f;
         platformLeftEdge = platform.position.x - platform.localScale.x/2f;
         platformRightEdge = platform.position.x + platform.localScale.x/2f;
+
+        audioSrc = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -107,10 +115,8 @@ public class RockScript : MonoBehaviour{
             rockState = state.OnPlatform;
             transform.position = new Vector2(transform.position.x, platformTopY); //reset y position
 
-            
-
-            //play thud sound
-            //todo
+            // play thud sound;
+            audioSrc.PlayOneShot(rockImpact, 1);
         }
     }
 
@@ -118,7 +124,9 @@ public class RockScript : MonoBehaviour{
         if(rockState == state.OnPlatform){
             if(rockSize == size.Small){
                 rockState = state.Grabbed;
+
                 //play pickup sound
+                audioSrc.PlayOneShot(rockPickup, 1);
 
                 //parent itself to player
                 transform.SetParent(
@@ -128,7 +136,12 @@ public class RockScript : MonoBehaviour{
             }else if(rockSize == size.Big){
                 rockState = state.BeingBroken;
                 //Play pickaxe and rock break sound
-                //TODO
+                audioSrc.PlayOneShot(pickaxeSound, 1);
+                audioSrc.PlayOneShot(rockBreak, 1);
+                // audio suspected not playing because rock deletes itself before sound can be played.
+                // @dAcid
+                // @dAcid
+                // @dAcid
 
                 //spawn 2 small rocks
                 spawnSmallRocks();

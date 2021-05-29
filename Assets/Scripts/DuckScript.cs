@@ -8,6 +8,11 @@ public class DuckScript : MonoBehaviour{
     public float offScreenYPos = -10;
     public float offPlatformYPos = -2;
 
+    public AudioClip duckPickup;
+    public AudioClip duckDeath;
+
+    private AudioSource audioSrc;
+
     private float platformTopY;
 
     public enum state {
@@ -29,6 +34,8 @@ public class DuckScript : MonoBehaviour{
 
         Transform platform = GameObject.FindGameObjectWithTag("Platform").transform;
         platformTopY = platform.position.y + platform.localScale.y/2f + transform.localScale.y/2f;
+
+        audioSrc = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -39,7 +46,9 @@ public class DuckScript : MonoBehaviour{
         if(duckState == state.FallingAfterGrab && transform.position.y < offPlatformYPos){
             duckState = state.FallingOffPlatform;
             //Play falling off sound (optional)
-            //todo
+            audioSrc.clip = duckDeath;
+            audioSrc.Play();
+
         }else if(duckState == state.FallingOffPlatform && transform.position.y < offScreenYPos){
             //GAMEOVER
             FindObjectOfType<GameController>().EndGame("Your duck is lost forever in the depths");
@@ -59,6 +68,8 @@ public class DuckScript : MonoBehaviour{
         if(duckState == state.OnPlatform){
             duckState = state.Grabbed;
             //play pickup sound
+            audioSrc.clip = duckPickup;
+            audioSrc.Play();
 
             //parent itself to player
             transform.SetParent(
