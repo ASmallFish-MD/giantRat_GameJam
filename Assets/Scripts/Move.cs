@@ -19,9 +19,9 @@ public class Move : MonoBehaviour
 
     public float offScreenYPos = -6f;
 
-    private float maxSpeed = 0.3f;
-    private float playerAcceleration = 0.05f;
-    private float playerDeceleration = 0.2f;
+    public float maxSpeed = 0.45f;
+    public float playerAcceleration = 0.075f;
+    public float playerDeceleration = 0.5f;
     private Vector3 playerSpeed = new Vector3(0, 0, 0);
     private bool facingRight = true;
 
