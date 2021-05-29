@@ -26,12 +26,18 @@ public class RockSpawner : MonoBehaviour{
     public float delayBetweenRocks = 2f;
     private float lastFallingRockTime = 0;
 
+
+
+    Transform beach;
+
     // Start is called before the first frame update
     void Start(){
         Transform platform = GameObject.FindGameObjectWithTag("Platform").transform;
         platformTopY = platform.position.y + platform.localScale.y/2f;
         platformLeftEdge = platform.position.x - platform.localScale.x/2f;
         platformRightEdge = platform.position.x + platform.localScale.x/2f;
+        
+        beach = GameObject.FindGameObjectWithTag("TheBeach").transform;
     }
 
     // Update is called once per frame
@@ -41,18 +47,22 @@ public class RockSpawner : MonoBehaviour{
             lastFallingRockTime = Time.time;
         }
         
-        if(Time.time > lastFallingRockTime + delayBetweenRocks){
+        if(Time.time > lastFallingRockTime + delayBetweenRocks
+            && beach.position.y>10f){
             spawnRock();
             lastFallingRockTime = Time.time;
         }
 
-        //*
+        /*
         if(Input.GetButtonDown("Fire2")){
             if(!checkForFallingRocks()){
                 spawnRock();
             }
         }
-        //*/
+        */
+
+        //spawn rocks faster to thurther you go up
+        spawnYPos = Mathf.Lerp(20f, 50f, beach.position.y/150f);
     }
 
     bool checkForFallingRocks(){
