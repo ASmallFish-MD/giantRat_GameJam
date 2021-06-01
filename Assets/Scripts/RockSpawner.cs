@@ -26,6 +26,8 @@ public class RockSpawner : MonoBehaviour{
     public float delayBetweenRocks = 2f;
     private float lastFallingRockTime = 0;
 
+    public float rockMargin = 0.1f;
+
 
 
     Transform beach;
@@ -163,8 +165,8 @@ public class RockSpawner : MonoBehaviour{
         for(int i = 0; i < rocks.Count-1; i++){ // for n rocks, there's n+1 segments between them
             //a usable segment starts at a rock y position + half it width and half the new rock width
             //it ends at the next rock's y position - half it width and half the new rock width
-            usableSegmentLeftEdge.Add(rocks.Keys[i] + rocks.Values[i]/2f + newRockWidth/2f);
-            usableSegmentRightEdge.Add(rocks.Keys[i+1] - rocks.Values[i+1]/2f - newRockWidth/2f);
+            usableSegmentLeftEdge.Add(rocks.Keys[i] + rocks.Values[i]/2f + newRockWidth/2f + rockMargin);
+            usableSegmentRightEdge.Add(rocks.Keys[i+1] - rocks.Values[i+1]/2f - newRockWidth/2f - rockMargin);
             //the left and right edge might swap sides. This means there is no usable segment
             usableSegmentLengths.Add(Mathf.Max(usableSegmentRightEdge[i] - usableSegmentLeftEdge[i], 0));
         }

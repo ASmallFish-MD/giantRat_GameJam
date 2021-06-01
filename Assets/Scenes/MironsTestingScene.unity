@@ -1392,6 +1392,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 1834c9eeb349bf44b88d6d24fec88b16, type: 3}
   - {fileID: 21300000, guid: 321d45599326d54449269f78e9e9493b, type: 3}
   delayBetweenRocks: 2
+  rockMargin: 0.1
 --- !u!1 &934287223
 GameObject:
   m_ObjectHideFlags: 0
