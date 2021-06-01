@@ -24,6 +24,7 @@ public class Move : MonoBehaviour
     public float playerDeceleration = 0.5f;
     private Vector3 playerSpeed = new Vector3(0, 0, 0);
     private bool facingRight = true;
+    public float gravity = 1f;
 
     public Animator animator;
     public GameObject sprite;
@@ -71,18 +72,25 @@ public class Move : MonoBehaviour
 
         // vertical speed calculation
         if (playerXpos < platformEdgeL || playerXpos > platformEdgeR) {
-            playerSpeed.y = max(playerSpeed.y - 0.05f * Time.deltaTime, -maxSpeed);
+            playerSpeed.y = max(playerSpeed.y - gravity * Time.deltaTime, -maxSpeed);
             xInput = 0;
         }
 
         // horizontal speed calculation
         if (valid && !isOpposite(xInput, playerSpeed.x)) {
-            playerSpeed.x = min(xInput * Time.deltaTime * playerAcceleration + playerSpeed.x, maxSpeed); 
+            playerSpeed.x = Mathf.Clamp(xInput * Time.deltaTime * playerAcceleration + playerSpeed.x, -maxSpeed, maxSpeed); 
         } else {
-            playerSpeed.x = max(-playerDeceleration * Time.deltaTime + playerSpeed.x, 0);
+            if(playerSpeed.x > 0.001f){
+                playerSpeed.x = max(-playerDeceleration * Time.deltaTime + playerSpeed.x, 0);
+            }else if(playerSpeed.x < -0.001f){
+                playerSpeed.x = min(playerDeceleration * Time.deltaTime + playerSpeed.x, 0);
+            }else{
+                playerSpeed.x = 0f;
+            }
+            
         }
 
-            // collision logic
+        // collision logic
         if (playerXpos < wallEdgeL || playerXpos > wallEdgeR) {
             playerSpeed.x = 0;
         }
@@ -98,7 +106,7 @@ public class Move : MonoBehaviour
             facingRight = false;
         }
 
-        transform.Translate(playerSpeed);
+        transform.Translate(playerSpeed * Time.deltaTime);
 
         if(transform.position.y < offScreenYPos){
             FindObjectOfType<GameController>().EndGame("You have fallen");

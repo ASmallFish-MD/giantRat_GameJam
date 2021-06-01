@@ -3862,9 +3862,10 @@ MonoBehaviour:
   wallEdgeL: -6.7
   wallEdgeR: 6.7
   offScreenYPos: -6
-  maxSpeed: 0.3
-  playerAcceleration: 0.05
-  playerDeceleration: 0.2
+  maxSpeed: 7
+  playerAcceleration: 22
+  playerDeceleration: 30
+  gravity: 10
   animator: {fileID: 1572756236564624469}
   sprite: {fileID: 1572756236564624465}
 --- !u!95 &1572756236564624469
