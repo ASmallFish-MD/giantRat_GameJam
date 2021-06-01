@@ -3858,14 +3858,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   faccingLeft: {x: -1.25, y: 1, z: 1}
   faccingRight: {x: 1.25, y: 1, z: 1}
-  platformEdgeL: -5.6
-  platformEdgeR: 5.6
+  platformEdgeL: -5.7
+  platformEdgeR: 5.7
   wallEdgeL: -6.7
   wallEdgeR: 6.7
   offScreenYPos: -6
   maxSpeed: 7
   playerAcceleration: 22
-  playerDeceleration: 30
+  playerDeceleration: 40
   gravity: 10
   animator: {fileID: 1572756236564624469}
   sprite: {fileID: 1572756236564624465}
