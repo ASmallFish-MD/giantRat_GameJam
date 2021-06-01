@@ -9,8 +9,8 @@ public class RockSpawner : MonoBehaviour{
 
     public float rockSizePercentVariation = 15f;
 
-    public List<float> rockSizes; //1,3
-    public List<float> rockProbabilities; //50,50
+    public List<float> rockSizes;
+    public List<float> rockProbabilities;
 
     public Transform rockPrefab;
     public Transform rockShadowLargePrefab;
@@ -86,7 +86,7 @@ public class RockSpawner : MonoBehaviour{
         float rockSize = randSizeMultiplier * rockSizes[rockType];
         
 
-        float xPos = getNewRockXPos(rockSize);
+        float xPos = getNewRockXPos(rockSize * rockPrefab.GetComponent<BoxCollider2D>().size.x);
 
         //spawn a rock
         Transform spawnedRock = Instantiate(rockPrefab, new Vector3(xPos, spawnYPos), Quaternion.identity);
